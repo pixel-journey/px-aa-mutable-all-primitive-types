@@ -4,7 +4,7 @@
 > **Stack:** layer 3 of 5 — [MUTABLE-STACK.md](https://github.com/pixel-journey/px-contract-examples-vault/blob/main/docs/MUTABLE-STACK.md)  
 > **Sources:** [SOURCES.md](SOURCES.md)
 
-**One-sentence goal:** Typed coerce and `setPrimitive` for every AtomicAssets **scalar** kind — bounds, finite floats, CIDv0/v1 ipfs, even-length hex byte — without wiping sibling keys.
+**One-sentence goal:** Typed coerce and `setPrimitive` for every AtomicAssets **scalar** kind, without wiping sibling keys. A string longer than 256, an IPFS string longer than 128, a byte hex longer than 512, and a value that is not a CIDv0 or CIDv1 are **this lab's** refusals. The contract's IPFS check is base58, so `"2"` is legal there and illegal here. The bytes are `previewAttributeBytes` in [wax-atomic-template-and-schema-explorer](https://github.com/pixel-journey/wax-atomic-template-and-schema-explorer).
 
 This is **not** its own contract. It is the scalar type check for the same `setassetdata` write as the other `px-aa-mutable-*` labs.
 
