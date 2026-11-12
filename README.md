@@ -1,20 +1,56 @@
 # px-aa-mutable-all-primitive-types
 
 > **Trust:** private educational lab (Tier B)  
-> **Quest:** 023 — int8..int64, uint8..uint64, float, double, string, ipfs, byte  
-> **Layer:** 3 of 5. Map: [MUTABLE-STACK.md](https://github.com/pixel-journey/px-contract-examples-vault/blob/main/docs/MUTABLE-STACK.md)  
-> **Vault:** [px-contract-examples-vault](https://github.com/pixel-journey/px-contract-examples-vault)
+> **Stack:** layer 3 of 5 — [MUTABLE-STACK.md](https://github.com/pixel-journey/px-contract-examples-vault/blob/main/docs/MUTABLE-STACK.md)  
+> **Sources:** [SOURCES.md](SOURCES.md)
 
-This is **not** its own contract. It is the scalar type check for the same `setassetdata` write as the other `px-aa-mutable-*` labs. Bytes are quest 021. Keeping sibling keys is 022. Vectors are 024. The XP game rule is 025.
+**One-sentence goal:** Typed coerce and `setPrimitive` for every AtomicAssets **scalar** kind — bounds, finite floats, CIDv0/v1 ipfs, even-length hex byte — without wiping sibling keys.
 
-Typed coerce and `setPrimitive` for every AtomicAssets scalar kind. Bounds, finite floats, CIDv0/v1 ipfs, even-length hex byte. Sibling keys stay when one field is written. Kind changes need `forceKind`.
+This is **not** its own contract. It is the scalar type check for the same `setassetdata` write as the other `px-aa-mutable-*` labs.
+
+| Layer | Concern |
+| --- | --- |
+| 1 | Bytes / deserialize |
+| 2 | Full-map write (no wipe) |
+| **3 (this)** | Scalar kinds and bounds |
+| 4 | Vectors |
+| 5 | Applied XP / level game rule |
+
+Ground truth for allowed type names: [Serialization wiki](https://github.com/pinknetworkx/atomicassets-contract/wiki/Serialization). Client map shape: [WAX mutable-data tutorial](https://docs.wax.io/build/tutorials/howto_atomicassets/mutabledata).
 
 **Real code:** `npm test`. No live AtomicAssets, no wasm.
 
-## Run
+## What is true (executed)
+
+- int8..int32 and uint bounds enforced; int64/uint64 via bigint.
+- Floats must be finite.
+- IPFS accepts CIDv0-style values used in the lab.
+- Byte fields require even-length hex.
+- Writing one key leaves siblings intact.
+- Kind mismatch refused unless `forceKind` is used.
 
 ```bash
 npm test
 ```
+
+## Layout
+
+| Path | Role |
+| --- | --- |
+| `invariants/` | Scalar coerce / setPrimitive tests |
+| `EDUCATION.md` | Why kinds are schema-driven |
+| `SECURITY.md` | Bounds and kind lock |
+| `SOURCES.md` | Official contract and docs.wax.io |
+
+## Stack neighbors
+
+| Layer | Repo |
+| --- | --- |
+| 1 | [px-aa-mutable-deserialize-core](https://github.com/pixel-journey/px-aa-mutable-deserialize-core) |
+| 2 | [px-aa-mutable-safe-partial-updater](https://github.com/pixel-journey/px-aa-mutable-safe-partial-updater) |
+| 4 | [px-aa-mutable-vector-arrays-crud](https://github.com/pixel-journey/px-aa-mutable-vector-arrays-crud) |
+| 5 | [px-aa-mutable-rpg-xp-and-leveling](https://github.com/pixel-journey/px-aa-mutable-rpg-xp-and-leveling) |
+
+## License
 
 MIT — Pixel Journey
