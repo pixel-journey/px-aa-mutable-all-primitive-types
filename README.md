@@ -18,7 +18,11 @@ This is **not** its own contract. It is the scalar type check for the same `seta
 
 Ground truth for allowed type names: [Serialization wiki](https://github.com/pinknetworkx/atomicassets-contract/wiki/Serialization). Client map shape: [WAX mutable-data tutorial](https://docs.wax.io/build/tutorials/howto_atomicassets/mutabledata).
 
-**Real code:** `npm test`. No live AtomicAssets, no wasm.
+**Real code:** `npm test` (unit + **sequential composition**). No live AtomicAssets, no wasm.
+
+## Composition note
+
+`primitives.composition.test.ts` writes uint32, string, and int8 in sequence. A kind mismatch is refused and the prior map stays usable. `forceKind` changes one key without dropping siblings. A bad IPFS string is refused; earlier keys stay.
 
 ## What is true (executed)
 
@@ -28,6 +32,7 @@ Ground truth for allowed type names: [Serialization wiki](https://github.com/pin
 - Byte fields require even-length hex.
 - Writing one key leaves siblings intact.
 - Kind mismatch refused unless `forceKind` is used.
+- Sequential scalar writes keep every earlier key.
 
 ```bash
 npm test
