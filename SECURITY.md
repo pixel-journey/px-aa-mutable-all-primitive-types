@@ -1,10 +1,10 @@
-# Security
+# Security notes — scalar kinds
 
-| Surface | Closed by |
+| Mitigated | Behavior |
 | --- | --- |
-| Integer overflow | per-kind min/max |
-| Silent kind change | kind mismatch |
-| Non-finite float | refused |
-| Bad ipfs / odd byte | shape refused |
+| Out-of-range ints | refused |
+| Non-finite floats | refused |
+| Kind mismatch | refused (unless forceKind) |
+| Lab length caps | refused |
 
-Not claimed: live setassetdata, schema table read, wasm.
+Production: schema-aware serialize on contract; collection auth; chain-sourced previous map (layers 1–2, 5 notes).
