@@ -1,26 +1,14 @@
-# AtomicAssets scalar mutables: every primitive kind and bound
+# Mutable primitives: bounds for every AtomicAssets scalar kind
 
-> **Stack:** layer 3 of 5 — [MUTABLE-STACK.md](https://github.com/pixel-journey/px-contract-examples-vault/blob/main/docs/MUTABLE-STACK.md)  
-> **Sources:** [SOURCES.md](SOURCES.md)
+> **Stack:** layer 3 of 5 — [MUTABLE-STACK.md](https://github.com/pixel-journey/px-contract-examples-vault/blob/main/docs/MUTABLE-STACK.md)
 
-**Goal:** Typed coerce and `setPrimitive` for every AtomicAssets **scalar** kind, without wiping sibling keys.
-
-**Code under test:** `npm test` (unit + sequential composition).
-
-## Learning materials
+Typed setters for int8…int64, uint8…uint64, float, double, string, ipfs, byte — with sibling-preserving `setPrimitive`. Pure TypeScript lab.
 
 | Doc | Role |
 | --- | --- |
-| [EDUCATION.md](EDUCATION.md) | Beginner → masterclass |
-| [WORKED-EXAMPLES.md](WORKED-EXAMPLES.md) | Sequential kinds, forceKind, bounds |
-| [TIPS.md](TIPS.md) | Schema type discipline |
-| [SECURITY.md](SECURITY.md) | Bounds and kind lock |
-| [SOURCES.md](SOURCES.md) | Wiki + contract |
-
-## What is true (executed)
-
-- int/uint bounds; int64/uint64 via bigint; finite floats; IPFS lab rules; even-length byte hex.
-- One key write leaves siblings intact; kind mismatch refused unless `forceKind`.
+| [EDUCATION.md](EDUCATION.md) | Outcomes |
+| [WORKED-EXAMPLES.md](WORKED-EXAMPLES.md) | Bounds tables |
+| [SOURCES.md](SOURCES.md) | AtomicAssets + serialization wiki |
 
 ```bash
 npm test

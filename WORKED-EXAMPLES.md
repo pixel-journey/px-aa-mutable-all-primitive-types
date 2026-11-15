@@ -1,26 +1,28 @@
-# Worked examples — scalar primitives
+# Worked examples — all primitive kinds
 
-## Example A — sequential kinds (composition)
+## Integer bounds
 
-Write `score` uint32, then `title` string, then `flag` int8. All three keys present afterward.
+| Kind | Accept | Refuse |
+| --- | --- | --- |
+| int8 | -128, 127 | 128, 1.5 |
+| uint32 | 4294967295 | -1, 4294967296 |
+| int64 | -1n | number 1 (type mismatch) |
+| uint64 | 0n | -1n |
 
-## Example B — kind mismatch
+## Float / IPFS / byte
 
-Existing uint32 key; write a string without `forceKind` → refused; map unchanged.
+Float 1.5 ok; NaN and Infinity → not finite.
 
-## Example C — forceKind
+CIDv0 `QmYwAPJzv5CZsnA625s3Xf2nemtYgPpHdWEz79ojWnPbdG` ok; `not-a-cid` refused.
 
-Retype one key on purpose; siblings remain.
+Byte `ABcd` lowercased to `abcd`; odd length / `zz` refused.
 
-## Example D — bounds
+## setPrimitive siblings
 
-| Case | Result |
-| --- | --- |
-| int8 128 | refused |
-| non-finite float | refused |
-| odd-length byte hex | refused |
-| overlong string/IPFS (lab caps) | refused |
+Set `level` uint16 3 then `name` string `pix` → both keys present.
 
-## Example E — bad IPFS mid-path
+Kind mismatch on existing key refused unless `forceKind: true`.
 
-Earlier keys stay when a later IPFS write fails.
+String length 257 refused. Byte `deadbeef` and IPFS integrate on the same map.
+
+Layer 3 of the mutable stack.
