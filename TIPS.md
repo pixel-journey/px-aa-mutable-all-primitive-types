@@ -1,17 +1,19 @@
-# Tips — primitive kinds
+# Tips — primitive kinds on AtomicAssets mutables
 
 ## Do
 
-- Match schema types exactly before write.  
-- Keep sibling keys on every update.  
-- Prefer bigint for 64-bit fields in TypeScript labs.
+- Match **schema types** exactly before write (int8≠int64, string≠ipfs).
+- Keep **sibling keys** on every update (full-map replace).
+- Prefer `bigint` for 64-bit fields in TypeScript labs.
+- Refuse NaN, Inf, and out-of-range integers instead of clamping.
 
 ## Don't
 
-- Coerce NaN into 0 silently.  
-- Use forceKind in production without a migration story.  
-- Treat string length 256 as the chain maximum without checking AA.
+- Coerce NaN into 0 silently.
+- Use `forceKind` in production without a migration story.
+- Treat string length 256 as the chain maximum without checking AtomicAssets.
+- Store a level as a string and later `get` it as uint32.
 
-## Related
+## Common mistakes
 
-[deserialize-core](https://github.com/pixel-journey/px-aa-mutable-deserialize-core) · [safe-partial](https://github.com/pixel-journey/px-aa-mutable-safe-partial-updater) · [vector CRUD](https://github.com/pixel-journey/px-aa-mutable-vector-arrays-crud) · [RPG XP](https://github.com/pixel-journey/px-aa-mutable-rpg-xp-and-leveling)
+1. Accepting `
