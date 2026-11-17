@@ -1,10 +1,11 @@
-# Security notes — scalar kinds
+# Security — primitive mutables
 
-| Mitigated | Behavior |
-| --- | --- |
-| Out-of-range ints | refused |
-| Non-finite floats | refused |
-| Kind mismatch | refused (unless forceKind) |
-| Lab length caps | refused |
+## Closed in tests
 
-Production: schema-aware serialize on contract; collection auth; chain-sourced previous map (layers 1–2, 5 notes).
+Out-of-range ints, non-finite floats, bad CID/bytes, kind mismatch (default), sibling preservation, overlong strings.
+
+## Not closed
+
+Collection auth, live schema enforcement on chain, forceKind abuse in migrations.
+
+No AtomicAssets RPC in this repository.

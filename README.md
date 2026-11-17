@@ -1,14 +1,14 @@
-# Mutable primitives: bounds for every AtomicAssets scalar kind
+# All primitive mutable kinds
 
-> **Stack:** layer 3 of 5 — [MUTABLE-STACK.md](https://github.com/pixel-journey/px-contract-examples-vault/blob/main/docs/MUTABLE-STACK.md)
-
-Typed setters for int8…int64, uint8…uint64, float, double, string, ipfs, byte — with sibling-preserving `setPrimitive`. Pure TypeScript lab.
+Educational bounds for AA mutable scalars + sibling-safe setPrimitive. Layer 3 of the mutable stack.
 
 | Doc | Role |
 | --- | --- |
-| [EDUCATION.md](EDUCATION.md) | Outcomes |
+| [EDUCATION.md](EDUCATION.md) | Beginner → masterclass |
 | [WORKED-EXAMPLES.md](WORKED-EXAMPLES.md) | Bounds tables |
-| [SOURCES.md](SOURCES.md) | AtomicAssets + serialization wiki |
+| [TIPS.md](TIPS.md) | Schema hygiene |
+| [SECURITY.md](SECURITY.md) | Gaps |
+| [SOURCES.md](SOURCES.md) | Links |
 
 ```bash
 npm test

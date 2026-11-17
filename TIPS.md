@@ -1,8 +1,17 @@
-# Tips — schema scalar types
+# Tips — primitive kinds
 
-- Match the **exact** type string from schema.format (`uint32` vs `int32`).
-- Never “JSON number” your way past bigint needs for int64/uint64.
-- Keep layer 2 full-map writes; this layer only validates the value.
-- For IPFS fields, test against the **contract** rules before mainnet.
+## Do
 
-Stack: L1 bytes → L2 patch → **L3 types** → L4 vectors → L5 RPG.
+- Match schema types exactly before write.  
+- Keep sibling keys on every update.  
+- Prefer bigint for 64-bit fields in TypeScript labs.
+
+## Don't
+
+- Coerce NaN into 0 silently.  
+- Use forceKind in production without a migration story.  
+- Treat string length 256 as the chain maximum without checking AA.
+
+## Related
+
+[deserialize-core](https://github.com/pixel-journey/px-aa-mutable-deserialize-core) · [safe-partial](https://github.com/pixel-journey/px-aa-mutable-safe-partial-updater) · [vector CRUD](https://github.com/pixel-journey/px-aa-mutable-vector-arrays-crud) · [RPG XP](https://github.com/pixel-journey/px-aa-mutable-rpg-xp-and-leveling)
